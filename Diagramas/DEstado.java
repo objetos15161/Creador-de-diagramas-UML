@@ -13,7 +13,8 @@ public class DEstado extends Diagramas
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
-    {
-        // Add your action code here.
-    }    
+    { 
+        if(Greenfoot.mouseClicked(this))
+            Greenfoot.setWorld(new WEstado()); 
+    }     
 }
