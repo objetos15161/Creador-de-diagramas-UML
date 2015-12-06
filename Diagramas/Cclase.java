@@ -1,5 +1,6 @@
 import greenfoot.*;
 import javax.swing.JOptionPane;
+import java.util.*;
 
 /**
  * Write a description of class Cclase here.
@@ -9,9 +10,14 @@ import javax.swing.JOptionPane;
  */
 public class Cclase extends DClases
 {
+    private LinkedList<String> listaAtributos;
+    private LinkedList<String> listaMetodos;
+    
     public Cclase()
     {
          arrAcciones = new Object[] {"Nuevo atributo", "Nuevo metodo", "Propiedades"};
+         listaAtributos = new LinkedList<String>();
+         listaMetodos = new LinkedList<String>();
     }
     
     /**
@@ -50,12 +56,19 @@ public class Cclase extends DClases
             {
                 case "Nuevo atributo":
                     String atributo = JOptionPane.showInputDialog("Ingresa el atributo:");
+                    if(atributo != null)
+                        listaAtributos.add(atributo);
                 break;
                 case "Nuevo metodo":
                     String metodo = JOptionPane.showInputDialog("Ingresa el metodo:");
+                    if(metodo != null)
+                        listaMetodos.add(metodo);
                 break;
                 case "Propiedades":
-                    String mensaje = "Atributos:\n" + "[Atributos]\n" + "Metodos:\n" + "[Metodos]\n";
+                    String mensaje = "Atributos:\n" 
+                    + listaAtributos.toString() + "\n" 
+                    + "Metodos:\n"
+                    + listaMetodos.toString() + "\n";
                     JOptionPane.showMessageDialog(null, mensaje);
                 break;
             }
