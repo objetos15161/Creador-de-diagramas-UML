@@ -8,6 +8,7 @@ import greenfoot.*;
  */
 public class Diagramas extends Actor
 {
+    public Object[] arrAcciones;
     /**
      * Act - do whatever the Diagramas wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -16,4 +17,9 @@ public class Diagramas extends Actor
     {
         // Add your action code here.
     }    
+    
+    public void construyeDialogo()
+    {
+        //Se implementa en las clases de los diagramas
+    }
 }
