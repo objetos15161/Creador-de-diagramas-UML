@@ -18,6 +18,8 @@ public class Menu extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(700, 600, 1); 
         
+        Greenfoot.setSpeed(100);
+        
         DCasoUso boton1 = new DCasoUso();
         DClases boton2 = new DClases();
         DSecuencia boton3 = new DSecuencia();
