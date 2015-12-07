@@ -14,7 +14,7 @@ public class MEstado extends DEstado
      */
     public void act() 
     {
-        if(Greenfoot.mouseClicked(this))
+        if(Greenfoot.mousePressed(this))
         {
             ((WEstado)getWorld()).tipo = WEstado.Seleccion.EstadoNuevo;
         }

@@ -14,7 +14,7 @@ public class MActividad extends DActividades
      */
     public void act() 
     {
-        if(Greenfoot.mouseClicked(this))
+        if(Greenfoot.mousePressed(this))
         {
             ((WActividades)getWorld()).tipo = WActividades.Seleccion.ActividadNueva;
         }

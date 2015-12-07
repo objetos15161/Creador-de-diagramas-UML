@@ -16,6 +16,7 @@ public class CcasoUso extends DCasoUso
     {
         arrAcciones = new Object[] {"Caso de Uso", "Propiedades"};
         casoUso = "";
+         permiteRelaciones = true;
     }
     
     /**
@@ -34,18 +35,16 @@ public class CcasoUso extends DCasoUso
             {
                 if(((WCasoUso)getWorld()).mousePresionado)
                 {
-                    ((WCasoUso)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WCasoUso)getWorld()).agregaPunto(getX(), getY(), true);
                     ((WCasoUso)getWorld()).mousePresionado = false;
                 }
             }
         }
         else if(Greenfoot.mousePressed(this))
         {  
-            ((WCasoUso)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WCasoUso)getWorld()).agregaPunto(getX(), getY(), false);
             ((WCasoUso)getWorld()).mousePresionado = true;
         }
-        else
-            ((WCasoUso)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
     }
     /**
      * Hold a dialog with the user.

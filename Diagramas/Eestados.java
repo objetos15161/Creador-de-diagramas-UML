@@ -18,6 +18,7 @@ public class Eestados extends DEstado
          arrAcciones = new Object[] {"Nombre", "Nueva Descripcion", "Propiedades"};
          nombreEstado = "";
          listaDescripcion = new LinkedList<String>();
+         permiteRelaciones = true;
     }
    
     /**
@@ -36,18 +37,16 @@ public class Eestados extends DEstado
             {
                 if(((WEstado)getWorld()).mousePresionado)
                 {
-                    ((WEstado)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WEstado)getWorld()).agregaPunto(getX(), getY(), true);
                     ((WEstado)getWorld()).mousePresionado = false;
                 }
             }
         }
         else if(Greenfoot.mousePressed(this))
         {  
-            ((WEstado)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WEstado)getWorld()).agregaPunto(getX(), getY(), false);
             ((WEstado)getWorld()).mousePresionado = true;
         }
-        else
-            ((WEstado)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
     }
     /**
      * Hold a dialog with the user.

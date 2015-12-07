@@ -33,6 +33,30 @@ public class Graficos extends Actor
         for(PintaElemento elem : listaFinal)
         {
             image.drawLine(elem.xIni, elem.yIni, elem.xFin, elem.yFin);
+            
+            double m = ((double)elem.yFin - (double)elem.yIni) / ((double)elem.xFin - (double)elem.xIni);
+            if(elem.xFin > elem.xIni)
+                for(int x = elem.xFin; x >= elem.xIni; x--)
+                {
+                    int y = (int)(m * (x - elem.xIni) + elem.yIni);
+                    java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
+                    if(lista.isEmpty())
+                    {
+                        image.fillOval(x - 10, y - 10, 20, 20);
+                        break;
+                    }
+                }
+            else
+                for(int x = elem.xFin; x <= elem.xIni; x++)
+                {
+                    int y = (int)(m * (x - elem.xIni) + elem.yIni);
+                    java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
+                    if(lista.isEmpty())
+                    {
+                        image.fillOval(x - 10, y - 10, 20, 20);
+                        break;
+                    }
+                }
         }
         
         for(PintaElemento elem : listaTemporal)
@@ -53,9 +77,46 @@ public class Graficos extends Actor
         elem.xFin = x2;
         elem.yFin = y2;
         if(esFinal)
-            listaFinal.add(elem);
+        {
+            if(validaRelacion(x1, y1, x2, y2))
+                listaFinal.add(elem);
+        }
         else
             listaTemporal.add(elem);
+    }
+    
+    private boolean validaRelacion(int x1, int y1, int x2, int y2)
+    {
+        boolean res = false, existeRelacion = false;
+        java.util.List listaUno = getWorld().getObjectsAt(x1, y1, Diagramas.class);
+        java.util.List listaDos = getWorld().getObjectsAt(x2, y2, Diagramas.class);
+        Actor elementoUno = null;
+        Actor elementoDos = null;
+        
+        for(PintaElemento elem : listaFinal)
+        {
+            if((elem.xIni == x1) && (elem.yIni == y1) && (elem.xFin == x2) && (elem.yFin == y2))
+            {
+                existeRelacion = true;
+                break;
+            }
+        }
+        if(!existeRelacion)
+        {
+            if(!listaUno.isEmpty())
+            {
+                elementoUno = (Actor)listaUno.get(0);
+            }
+            if(!listaDos.isEmpty())
+            {
+                elementoDos = (Actor)listaDos.get(0);
+            }
+            if((elementoUno != null) && (elementoUno instanceof Diagramas) && (((Diagramas)elementoUno).permiteRelaciones))
+                if((elementoDos != null) && (elementoDos instanceof Diagramas) && (((Diagramas)elementoDos).permiteRelaciones))
+                        res = true;
+        } 
+        
+        return res;
     }
     
     private class PintaElemento

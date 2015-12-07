@@ -10,7 +10,7 @@ public class FinActividad extends DActividades
 {
     public FinActividad()
     {
-         //arrAcciones = new Object[] {"Opcion1", "Opcion2", "OpcionN"};
+         permiteRelaciones = true;
     }
     
     /**
@@ -29,7 +29,7 @@ public class FinActividad extends DActividades
             {
                 if(((WActividades)getWorld()).mousePresionado)
                 {
-                    ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WActividades)getWorld()).agregaPunto(getX(), getY(), true);
                     ((WActividades)getWorld()).mousePresionado = false;
                 }
                     
@@ -37,10 +37,8 @@ public class FinActividad extends DActividades
         }
         else if(Greenfoot.mousePressed(this))
         {  
-            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WActividades)getWorld()).agregaPunto(getX(), getY(), false);
             ((WActividades)getWorld()).mousePresionado = true;
         }
-        else
-            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
     }
 }

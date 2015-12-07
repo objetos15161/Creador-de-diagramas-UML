@@ -20,6 +20,7 @@ public class Cclase extends DClases
          nombreClase = "";
          listaAtributos = new LinkedList<String>();
          listaMetodos = new LinkedList<String>();
+         permiteRelaciones = true;
     }
     
     /**
@@ -38,18 +39,16 @@ public class Cclase extends DClases
             {
                 if(((WClase)getWorld()).mousePresionado)
                 {
-                    ((WClase)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WClase)getWorld()).agregaPunto(getX(), getY(), true);
                     ((WClase)getWorld()).mousePresionado = false;
                 }
             }
         }
         else if(Greenfoot.mousePressed(this))
         {  
-            ((WClase)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WClase)getWorld()).agregaPunto(getX(), getY(), false);
             ((WClase)getWorld()).mousePresionado = true;
         }
-        else
-            ((WClase)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
     }
     
     /**

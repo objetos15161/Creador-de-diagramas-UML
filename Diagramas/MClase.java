@@ -14,7 +14,7 @@ public class MClase extends DClases
      */
     public void act() 
     {
-        if(Greenfoot.mouseClicked(this))
+        if(Greenfoot.mousePressed(this))
         {
             ((WClase)getWorld()).tipo = WClase.Seleccion.ClaseNueva;
         }

@@ -16,6 +16,7 @@ public class Actividad extends DActividades
     {
          arrAcciones = new Object[] {"Nueva Actividad", "Propiedades"};
          listaActividad = new LinkedList<String>();
+         permiteRelaciones = true;
     }
     
     /**
@@ -34,18 +35,16 @@ public class Actividad extends DActividades
             {
                 if(((WActividades)getWorld()).mousePresionado)
                 {
-                    ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WActividades)getWorld()).agregaPunto(getX(), getY(), true);
                     ((WActividades)getWorld()).mousePresionado = false; 
                 }
             }
         }
         else if(Greenfoot.mousePressed(this))
         {  
-            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WActividades)getWorld()).agregaPunto(getX(), getY(), false);
             ((WActividades)getWorld()).mousePresionado = true;
         }
-        else
-            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
     }
     
     /**

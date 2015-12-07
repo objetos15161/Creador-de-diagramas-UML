@@ -16,6 +16,7 @@ public class Desicion extends DActividades
    {
        arrAcciones = new Object[] {"Desicion", "Propiedades"};
        desicion = "";
+       permiteRelaciones = true;
    }
     
     /**
@@ -34,18 +35,16 @@ public class Desicion extends DActividades
             {
                 if(((WActividades)getWorld()).mousePresionado)
                 {
-                    ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WActividades)getWorld()).agregaPunto(getX(), getY(), true);
                     ((WActividades)getWorld()).mousePresionado = false;
                 }
             }
         }
         else if(Greenfoot.mousePressed(this))
         {  
-            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WActividades)getWorld()).agregaPunto(getX(), getY(), false);
             ((WActividades)getWorld()).mousePresionado = true;
         }
-        else
-            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
     }
      /**
      * Hold a dialog with the user.

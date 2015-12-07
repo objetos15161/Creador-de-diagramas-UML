@@ -14,7 +14,7 @@ public class MCasoUso extends DCasoUso
      */
     public void act() 
     {
-         if(Greenfoot.mouseClicked(this))
+        if(Greenfoot.mousePressed(this))
         {
             ((WCasoUso)getWorld()).tipo = WCasoUso.Seleccion.CasoNuevo;
         }

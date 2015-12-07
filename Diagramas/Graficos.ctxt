@@ -8,4 +8,6 @@ comment2.target=void\ act()
 comment2.text=\r\n\ Act\ -\ do\ whatever\ the\ Graficos\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
 comment3.params=x1\ y1\ x2\ y2\ esFinal
 comment3.target=void\ agregaLinea(int,\ int,\ int,\ int,\ boolean)
-numComments=4
+comment4.params=x1\ y1\ x2\ y2
+comment4.target=boolean\ validaRelacion(int,\ int,\ int,\ int)
+numComments=5
