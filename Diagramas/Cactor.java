@@ -1,4 +1,6 @@
 import greenfoot.*;
+import javax.swing.JOptionPane;
+import java.util.*;
 
 /**
  * Write a description of class Cactor here.
@@ -8,24 +10,73 @@ import greenfoot.*;
  */
 public class Cactor extends DCasoUso
 {
+    private String nombreActor;   
+    
     public Cactor()
     {
-         //arrAcciones = new Object[] {"Opcion1", "Opcion2", "OpcionN"};
+        arrAcciones = new Object[] {"Nombre",  "Propiedades"};
+        nombreActor = "";     
     }
     
     /**
      * Act - do whatever the Cactor wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public void act() 
+     public void act() 
     {
-        if (Greenfoot.mousePressed(this)) {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
-            
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if (Greenfoot.mouseClicked(this)) { 
             if(mouse.getButton() == 3) //right-click
             {
                 construyeDialogo();
             }
+            else 
+            {
+                if(((WCasoUso)getWorld()).mousePresionado)
+                {
+                    ((WCasoUso)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WCasoUso)getWorld()).mousePresionado = false;
+                }
+            }
         }
-    } 
+        else if(Greenfoot.mousePressed(this))
+        {  
+            ((WCasoUso)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WCasoUso)getWorld()).mousePresionado = true;
+        }
+        else
+            ((WCasoUso)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+    }
+    /**
+     * Hold a dialog with the user.
+     */
+    public void construyeDialogo()
+    {
+        String accion;
+        
+        accion = (String)JOptionPane.showInputDialog(
+            null,
+            "Selecciona una opción:\n",
+            "Seleccion de acción",
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            arrAcciones,
+            "Propiedades");
+        if(accion != null)
+        {
+            switch(accion)
+            {
+               case "Nombre":
+                    String nombre = JOptionPane.showInputDialog("Ingresa el Nombre:");
+                    if(nombre != null)
+                        nombreActor = nombre;
+                break;               
+                case "Propiedades":
+                    String mensaje = "Nombre:\n" 
+                    + nombreActor + "\n" ;                    
+                    JOptionPane.showMessageDialog(null, mensaje);
+                break;
+             }
+        }
+    }
 }

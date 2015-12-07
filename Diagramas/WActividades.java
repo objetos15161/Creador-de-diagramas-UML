@@ -7,7 +7,7 @@ import java.awt.Color;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class WActividades extends World
+public class WActividades extends WDiagramas
 {
     public enum Seleccion {
         Nada,
@@ -26,7 +26,7 @@ public class WActividades extends World
     public WActividades()
     {    
        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(700, 600, 1); 
+       
         BRegresar bReturn;
         MNodoInicial boton1;
         MActividad boton2;
@@ -43,7 +43,7 @@ public class WActividades extends World
         boton4 = new MFinActividad();
         boton5 = new MFinDiagrama();
      
-        
+        addObject(g, 350, 300);
         addObject(bReturn, 650, 40);
         addObject(boton1, 30, 25);
         addObject(boton2, 80, 25);
@@ -52,10 +52,11 @@ public class WActividades extends World
         addObject(boton5, 230, 25);
     }
      public void act() 
-    { 
-        if(Greenfoot.mouseClicked(this))
+    {    
+       MouseInfo mouse = Greenfoot.getMouseInfo(); 
+        if(Greenfoot.mouseClicked(g))
         {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
+           mousePresionado = false;
             switch(tipo)
             {
                 case InicioNuevo: //Nueva clase
@@ -95,5 +96,13 @@ public class WActividades extends World
 
             }
         }
+        
+        else if(Greenfoot.mousePressed(g))
+        {  
+            agregaPunto(mouse.getX(), mouse.getY(), false);
+            mousePresionado = true;
+        }
+        else
+            agregaPunto(mouse.getX(), mouse.getY(), false);
      }
 }

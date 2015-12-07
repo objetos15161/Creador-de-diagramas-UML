@@ -1,4 +1,6 @@
 import greenfoot.*;
+import javax.swing.JOptionPane;
+import java.util.*;
 
 /**
  * Write a description of class Actividad here.
@@ -8,9 +10,12 @@ import greenfoot.*;
  */
 public class Actividad extends DActividades
 {
+    private LinkedList<String> listaActividad;
+    
     public Actividad()
     {
-         //arrAcciones = new Object[] {"Opcion1", "Opcion2", "OpcionN"};
+         arrAcciones = new Object[] {"Nueva Actividad", "Propiedades"};
+         listaActividad = new LinkedList<String>();
     }
     
     /**
@@ -19,13 +24,62 @@ public class Actividad extends DActividades
      */
     public void act() 
     {
-        if (Greenfoot.mousePressed(this)) {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
-            
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if (Greenfoot.mouseClicked(this)) { 
             if(mouse.getButton() == 3) //right-click
             {
                 construyeDialogo();
             }
+            else 
+            {
+                if(((WActividades)getWorld()).mousePresionado)
+                {
+                    ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WActividades)getWorld()).mousePresionado = false; 
+                }
+            }
         }
-    }  
+        else if(Greenfoot.mousePressed(this))
+        {  
+            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WActividades)getWorld()).mousePresionado = true;
+        }
+        else
+            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+    }
+    
+    /**
+     * Hold a dialog with the user.
+     */
+    public void construyeDialogo()
+    {
+        String accion;
+        
+        accion = (String)JOptionPane.showInputDialog(
+            null,
+            "Selecciona una opción:\n",
+            "Seleccion de acción",
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            arrAcciones,
+            "Propiedades");
+        if(accion != null)
+        {
+            switch(accion)
+            {
+                case "Nueva Actividad":
+                    String actividad = JOptionPane.showInputDialog("Ingresa la Actividad:");
+                    if(actividad != null)
+                        listaActividad.add(actividad);
+                break;
+           
+                case "Propiedades":
+                    String mensaje = "Actividad:\n"
+                    + listaActividad.toString() + "\n";
+                    JOptionPane.showMessageDialog(null, mensaje);
+                break;
+             }
+        }
+    }
 }
+

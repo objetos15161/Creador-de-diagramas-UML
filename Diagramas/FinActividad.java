@@ -19,13 +19,28 @@ public class FinActividad extends DActividades
      */
     public void act() 
     {
-        if (Greenfoot.mousePressed(this)) {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
-            
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if (Greenfoot.mouseClicked(this)) { 
             if(mouse.getButton() == 3) //right-click
             {
                 construyeDialogo();
             }
+            else 
+            {
+                if(((WActividades)getWorld()).mousePresionado)
+                {
+                    ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WActividades)getWorld()).mousePresionado = false;
+                }
+                    
+            }
         }
-    }    
+        else if(Greenfoot.mousePressed(this))
+        {  
+            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WActividades)getWorld()).mousePresionado = true;
+        }
+        else
+            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+    }
 }

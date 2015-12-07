@@ -1,4 +1,6 @@
 import greenfoot.*;
+import javax.swing.JOptionPane;
+import java.util.*;
 
 /**
  * Write a description of class CcasoUso here.
@@ -8,9 +10,12 @@ import greenfoot.*;
  */
 public class CcasoUso extends DCasoUso
 {
+    private String casoUso;
+    
     public CcasoUso()
     {
-         //arrAcciones = new Object[] {"Opcion1", "Opcion2", "OpcionN"};
+        arrAcciones = new Object[] {"Caso de Uso", "Propiedades"};
+        casoUso = "";
     }
     
     /**
@@ -19,13 +24,61 @@ public class CcasoUso extends DCasoUso
      */
     public void act() 
     {
-        if (Greenfoot.mousePressed(this)) {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
-            
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if (Greenfoot.mouseClicked(this)) { 
             if(mouse.getButton() == 3) //right-click
             {
                 construyeDialogo();
             }
+            else 
+            {
+                if(((WCasoUso)getWorld()).mousePresionado)
+                {
+                    ((WCasoUso)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WCasoUso)getWorld()).mousePresionado = false;
+                }
+            }
         }
-    }   
+        else if(Greenfoot.mousePressed(this))
+        {  
+            ((WCasoUso)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WCasoUso)getWorld()).mousePresionado = true;
+        }
+        else
+            ((WCasoUso)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+    }
+    /**
+     * Hold a dialog with the user.
+     */
+    public void construyeDialogo()
+    {
+        String accion;
+        
+        accion = (String)JOptionPane.showInputDialog(
+            null,
+            "Selecciona una opción:\n",
+            "Seleccion de acción",
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            arrAcciones,
+            "Propiedades");
+        if(accion != null)
+        {
+            switch(accion)
+            {
+               case "Caso de Uso":
+                    String caso = JOptionPane.showInputDialog("Ingresa el Caso de Uso:");
+                    if(caso != null)
+                       casoUso = caso;
+                break;
+                case "Propiedades":
+                    String mensaje = "Caso de Uso:\n" 
+                    + casoUso + "\n" ;
+                    JOptionPane.showMessageDialog(null, mensaje);
+                break;
+             }
+        }
+    }
 }
+
+

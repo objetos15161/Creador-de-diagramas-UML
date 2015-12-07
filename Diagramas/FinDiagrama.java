@@ -17,15 +17,29 @@ public class FinDiagrama extends DActividades
      * Act - do whatever the FinActividad wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public void act() 
+     public void act() 
     {
-        if (Greenfoot.mousePressed(this)) {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
-            
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if (Greenfoot.mouseClicked(this)) { 
             if(mouse.getButton() == 3) //right-click
             {
                 construyeDialogo();
             }
+            else 
+            {
+                if(((WActividades)getWorld()).mousePresionado)
+                {
+                    ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WActividades)getWorld()).mousePresionado = false;
+                }
+            }
         }
-    }  
+        else if(Greenfoot.mousePressed(this))
+        {  
+            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WActividades)getWorld()).mousePresionado = true;
+        }
+        else
+            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+    }
 }

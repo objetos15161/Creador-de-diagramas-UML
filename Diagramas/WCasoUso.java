@@ -7,7 +7,7 @@ import java.awt.Color;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class WCasoUso extends World
+public class WCasoUso extends WDiagramas
 {
     public enum Seleccion {
         Nada,
@@ -22,7 +22,7 @@ public class WCasoUso extends World
     public WCasoUso()
     {    
        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(700, 600, 1); 
+        
         BRegresar bReturn;
         bReturn = new BRegresar();
         MActor boton1;
@@ -34,15 +34,17 @@ public class WCasoUso extends World
         boton1 = new MActor();
         boton2 = new MCasoUso();
          
+        addObject(g, 350, 300);
         addObject(boton1, 30, 25);
         addObject(boton2, 80, 25);
         addObject(bReturn, 650, 40);
     }
      public void act() 
     { 
-        if(Greenfoot.mouseClicked(this))
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if(Greenfoot.mouseClicked(g))
         {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
+            mousePresionado = false;
             switch(tipo)
             {
                 case ActorNuevo: //Nueva clase
@@ -60,6 +62,13 @@ public class WCasoUso extends World
                 break;
             }
         }
-              
+        
+        else if(Greenfoot.mousePressed(g))
+        {  
+            agregaPunto(mouse.getX(), mouse.getY(), false);
+            mousePresionado = true;
+        }
+        else
+            agregaPunto(mouse.getX(), mouse.getY(), false);
     }
 }

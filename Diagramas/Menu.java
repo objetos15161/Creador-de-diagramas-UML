@@ -25,7 +25,7 @@ public class Menu extends World
         DSecuencia boton3 = new DSecuencia();
         DActividades boton4 = new DActividades();
         DEstado boton5 = new DEstado();
-        
+
         addObject(boton1, 75, 75);
         addObject(boton2, 625, 75);
         addObject(boton3, 75, 525);

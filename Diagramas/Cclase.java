@@ -12,10 +12,12 @@ public class Cclase extends DClases
 {
     private LinkedList<String> listaAtributos;
     private LinkedList<String> listaMetodos;
+    private String nombreClase;
     
     public Cclase()
-    {
-         arrAcciones = new Object[] {"Nuevo atributo", "Nuevo metodo", "Propiedades"};
+   {
+         arrAcciones = new Object[] {"Nombre", "Nuevo atributo", "Nuevo metodo", "Propiedades"};
+         nombreClase = "";
          listaAtributos = new LinkedList<String>();
          listaMetodos = new LinkedList<String>();
     }
@@ -26,14 +28,28 @@ public class Cclase extends DClases
      */
     public void act() 
     {
-        if (Greenfoot.mousePressed(this)) {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
-            
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if (Greenfoot.mouseClicked(this)) { 
             if(mouse.getButton() == 3) //right-click
             {
                 construyeDialogo();
             }
+            else 
+            {
+                if(((WClase)getWorld()).mousePresionado)
+                {
+                    ((WClase)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WClase)getWorld()).mousePresionado = false;
+                }
+            }
         }
+        else if(Greenfoot.mousePressed(this))
+        {  
+            ((WClase)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WClase)getWorld()).mousePresionado = true;
+        }
+        else
+            ((WClase)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
     }
     
     /**
@@ -52,8 +68,15 @@ public class Cclase extends DClases
             arrAcciones,
             "Propiedades");
         if(accion != null)
-            switch(accion) 
+        {
+            switch(accion)
             {
+               case "Nombre":
+                    String nombre = JOptionPane.showInputDialog("Ingresa el Nombre:");
+                    if(nombre != null)
+                        nombreClase = nombre;
+                break;
+ 
                 case "Nuevo atributo":
                     String atributo = JOptionPane.showInputDialog("Ingresa el atributo:");
                     if(atributo != null)
@@ -65,12 +88,15 @@ public class Cclase extends DClases
                         listaMetodos.add(metodo);
                 break;
                 case "Propiedades":
-                    String mensaje = "Atributos:\n" 
-                    + listaAtributos.toString() + "\n" 
+                    String mensaje = "Nombre:\n" 
+                    + nombreClase + "\n" 
+                    + "Atributos:\n" 
+                    + listaAtributos.toString() + "\n"
                     + "Metodos:\n"
                     + listaMetodos.toString() + "\n";
                     JOptionPane.showMessageDialog(null, mensaje);
                 break;
-            }
+             }
+        }
     }
 }

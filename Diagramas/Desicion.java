@@ -1,4 +1,6 @@
 import greenfoot.*;
+import javax.swing.JOptionPane;
+import java.util.*;
 
 /**
  * Write a description of class Desicion here.
@@ -8,24 +10,73 @@ import greenfoot.*;
  */
 public class Desicion extends DActividades
 {
-    public Desicion()
-    {
-         //arrAcciones = new Object[] {"Opcion1", "Opcion2", "OpcionN"};
-    }
+   private String desicion;
+    
+   public Desicion()
+   {
+       arrAcciones = new Object[] {"Desicion", "Propiedades"};
+       desicion = "";
+   }
     
     /**
      * Act - do whatever the Desicion wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public void act() 
+     public void act() 
     {
-        if (Greenfoot.mousePressed(this)) {
-            MouseInfo mouse = Greenfoot.getMouseInfo();
-            
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if (Greenfoot.mouseClicked(this)) { 
             if(mouse.getButton() == 3) //right-click
             {
                 construyeDialogo();
             }
+            else 
+            {
+                if(((WActividades)getWorld()).mousePresionado)
+                {
+                    ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WActividades)getWorld()).mousePresionado = false;
+                }
+            }
         }
-    }   
+        else if(Greenfoot.mousePressed(this))
+        {  
+            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WActividades)getWorld()).mousePresionado = true;
+        }
+        else
+            ((WActividades)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+    }
+     /**
+     * Hold a dialog with the user.
+     */
+    public void construyeDialogo()
+    {
+        String accion;
+        
+        accion = (String)JOptionPane.showInputDialog(
+            null,
+            "Selecciona una opción:\n",
+            "Seleccion de acción",
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            arrAcciones,
+            "Propiedades");
+        if(accion != null)
+        {
+            switch(accion)
+            {
+               case "Desicion":
+                    String nombre = JOptionPane.showInputDialog("Ingresa la desicion:");
+                    if(nombre != null)
+                        desicion = nombre;
+                break; 
+                case "Propiedades":
+                     String mensaje = "Desicion:\n" 
+                    + desicion + "\n";
+                    JOptionPane.showMessageDialog(null, mensaje);
+                break;
+             }
+        }
+    }
 }
