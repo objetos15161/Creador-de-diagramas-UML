@@ -1,12 +1,12 @@
 import greenfoot.*;
 
 /**
- * Write a description of class DSecuencia here.
+ * Write a description of class DComunicacion here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class DSecuencia extends Diagramas
+public class DComunicacion extends Diagramas
 {
     /**
      * Act - do whatever the DSecuencia wants to do. This method is called whenever
@@ -15,6 +15,6 @@ public class DSecuencia extends Diagramas
     public void act() 
     { 
         if(Greenfoot.mouseClicked(this))
-            Greenfoot.setWorld(new WSecuencia()); 
+            Greenfoot.setWorld(new WComunicacion()); 
     }    
 }

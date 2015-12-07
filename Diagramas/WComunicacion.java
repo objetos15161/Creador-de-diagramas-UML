@@ -8,11 +8,11 @@ import java.awt.Color;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class WSecuencia extends WDiagramas
+public class WComunicacion extends WDiagramas
 {
      public enum Seleccion {
         Nada,
-        SecuenciaNueva; 
+        ComunicacionNueva; 
     }
 
     public Seleccion tipo;  
@@ -20,16 +20,16 @@ public class WSecuencia extends WDiagramas
      * Constructor for objects of class WSecuencia.
      * 
      */
-    public WSecuencia()
+    public WComunicacion()
     {    
        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
        
         BRegresar bReturn;
-        MSecuencia boton1;
+        MComunicacion boton1;
         
         tipo = Seleccion.Nada;
         
-        boton1 = new MSecuencia();
+        boton1 = new MComunicacion();
         bReturn = new BRegresar();
         
         addObject(g, 350, 300);
@@ -45,10 +45,10 @@ public class WSecuencia extends WDiagramas
             mousePresionado = false;
             switch(tipo)
             {
-                case SecuenciaNueva: //Nueva clase
-                    Ssecuencia sec ;
-                    sec = new Ssecuencia();
-                    addObject(sec, mouse.getX(), mouse.getY());
+                case ComunicacionNueva: //Nueva clase
+                    CComunicacion com ;
+                    com = new CComunicacion();
+                    addObject(com, mouse.getX(), mouse.getY());
                     tipo = Seleccion.Nada;
                 break;
             }

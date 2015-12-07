@@ -33,35 +33,13 @@ public class Graficos extends Actor
         for(PintaElemento elem : listaFinal)
         {
             image.drawLine(elem.xIni, elem.yIni, elem.xFin, elem.yFin);
-            
-            double m = ((double)elem.yFin - (double)elem.yIni) / ((double)elem.xFin - (double)elem.xIni);
-            if(elem.xFin > elem.xIni)
-                for(int x = elem.xFin; x >= elem.xIni; x--)
-                {
-                    int y = (int)(m * (x - elem.xIni) + elem.yIni);
-                    java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
-                    if(lista.isEmpty())
-                    {
-                        image.fillOval(x - 10, y - 10, 20, 20);
-                        break;
-                    }
-                }
-            else
-                for(int x = elem.xFin; x <= elem.xIni; x++)
-                {
-                    int y = (int)(m * (x - elem.xIni) + elem.yIni);
-                    java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
-                    if(lista.isEmpty())
-                    {
-                        image.fillOval(x - 10, y - 10, 20, 20);
-                        break;
-                    }
-                }
+            image.fillOval(elem.xFin - 6, elem.yFin - 6, 12, 12);
         }
         
         for(PintaElemento elem : listaTemporal)
         {
             image.drawLine(elem.xIni, elem.yIni, elem.xFin, elem.yFin);
+            image.fillOval(elem.xFin - 6, elem.yFin - 6, 12, 12);
         }
         
         listaTemporal.clear();
@@ -76,6 +54,59 @@ public class Graficos extends Actor
         elem.yIni = y1;
         elem.xFin = x2;
         elem.yFin = y2;
+        
+        double m = ((double)elem.yFin - (double)elem.yIni) / ((double)elem.xFin - (double)elem.xIni);
+        
+        if(elem.xIni > elem.xFin)
+            for(int x = elem.xIni; x >= elem.xFin; x--)
+            {
+                int y = (int)(m * (x - elem.xFin) + elem.yFin);
+                java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
+                if(lista.isEmpty())
+                {
+                    elem.xIni = x;
+                    elem.yIni = y;
+                    break;
+                }
+            }
+        else
+            for(int x = elem.xIni; x <= elem.xFin; x++)
+            {
+                int y = (int)(m * (x - elem.xFin) + elem.yFin);
+                java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
+                if(lista.isEmpty())
+                {
+                    elem.xIni = x;
+                    elem.yIni = y;
+                    break;
+                }
+            }
+            
+        if(elem.xFin > elem.xIni)
+            for(int x = elem.xFin; x >= elem.xIni; x--)
+            {
+                int y = (int)(m * (x - elem.xIni) + elem.yIni);
+                java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
+                if(lista.isEmpty())
+                {
+                    elem.xFin = x;
+                    elem.yFin = y;
+                    break;
+                }
+            }
+        else
+            for(int x = elem.xFin; x <= elem.xIni; x++)
+            {
+                int y = (int)(m * (x - elem.xIni) + elem.yIni);
+                java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
+                if(lista.isEmpty())
+                {
+                    elem.xFin = x;
+                    elem.yFin = y;
+                    break;
+                }
+            }
+       
         if(esFinal)
         {
             if(validaRelacion(x1, y1, x2, y2))

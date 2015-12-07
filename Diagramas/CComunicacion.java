@@ -8,16 +8,17 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Ssecuencia extends DSecuencia
+public class CComunicacion extends DComunicacion
 {
     private LinkedList<String> listaObjeto;
     private String nombreDiagrama;
     
-    public Ssecuencia()
+    public CComunicacion()
     {
         arrAcciones = new Object[] {"Nombre", "Objeto", "Propiedades"};
         nombreDiagrama = "";
         listaObjeto = new LinkedList<String>();
+        permiteRelaciones = true;
     }
     
    /**
@@ -34,20 +35,20 @@ public class Ssecuencia extends DSecuencia
             }
             else 
             {
-                if(((WSecuencia)getWorld()).mousePresionado)
+                if(((WComunicacion)getWorld()).mousePresionado)
                 {
-                    ((WSecuencia)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
-                    ((WSecuencia)getWorld()).mousePresionado = false;
+                    ((WComunicacion)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), true);
+                    ((WComunicacion)getWorld()).mousePresionado = false;
                 }
             }
         }
         else if(Greenfoot.mousePressed(this))
         {  
-            ((WSecuencia)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
-            ((WSecuencia)getWorld()).mousePresionado = true;
+            ((WComunicacion)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WComunicacion)getWorld()).mousePresionado = true;
         }
         else
-            ((WSecuencia)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
+            ((WComunicacion)getWorld()).agregaPunto(mouse.getX(), mouse.getY(), false);
     }
     
     /**

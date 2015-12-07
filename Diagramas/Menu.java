@@ -22,14 +22,14 @@ public class Menu extends World
         
         DCasoUso boton1 = new DCasoUso();
         DClases boton2 = new DClases();
-        DSecuencia boton3 = new DSecuencia();
+        DComunicacion boton3 = new DComunicacion();
         DActividades boton4 = new DActividades();
         DEstado boton5 = new DEstado();
 
         addObject(boton1, 75, 75);
         addObject(boton2, 625, 75);
-        addObject(boton3, 75, 525);
+        addObject(boton3, 350, 300);
         addObject(boton4, 625, 525);
-        addObject(boton5, 350, 300);
+        addObject(boton5, 75, 525);
     }
 }

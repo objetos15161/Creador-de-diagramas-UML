@@ -6,7 +6,7 @@ import greenfoot.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class MSecuencia extends DSecuencia
+public class MComunicacion extends DComunicacion
 {
     /**
      * Act - do whatever the MSecuencia wants to do. This method is called whenever
@@ -14,9 +14,9 @@ public class MSecuencia extends DSecuencia
      */
     public void act() 
     {
-         if(Greenfoot.mouseClicked(this))
+         if(Greenfoot.mousePressed(this))
         {
-            ((WSecuencia)getWorld()).tipo = WSecuencia.Seleccion.SecuenciaNueva;
+            ((WComunicacion)getWorld()).tipo = WComunicacion.Seleccion.ComunicacionNueva;
         }
     }    
 }
