@@ -33,13 +33,13 @@ public class Graficos extends Actor
         for(PintaElemento elem : listaFinal)
         {
             image.drawLine(elem.xIni, elem.yIni, elem.xFin, elem.yFin);
-            image.fillOval(elem.xFin - 6, elem.yFin - 6, 12, 12);
+            image.fillRect(elem.xFin - 4, elem.yFin - 4, 8, 8);
         }
         
         for(PintaElemento elem : listaTemporal)
         {
             image.drawLine(elem.xIni, elem.yIni, elem.xFin, elem.yFin);
-            image.fillOval(elem.xFin - 6, elem.yFin - 6, 12, 12);
+            image.fillRect(elem.xFin - 4, elem.yFin - 4, 8, 8);
         }
         
         listaTemporal.clear();
@@ -49,13 +49,17 @@ public class Graficos extends Actor
     
     public void agregaLinea(int x1, int y1, int x2, int y2, boolean esFinal)
     {
+        double m;
         PintaElemento elem = new PintaElemento();
         elem.xIni = x1;
         elem.yIni = y1;
         elem.xFin = x2;
         elem.yFin = y2;
         
-        double m = ((double)elem.yFin - (double)elem.yIni) / ((double)elem.xFin - (double)elem.xIni);
+        if(elem.xFin - elem.xIni == 0)
+            m = 1;
+        else
+            m = ((double)elem.yFin - (double)elem.yIni) / ((double)elem.xFin - (double)elem.xIni);
         
         if(elem.xIni > elem.xFin)
             for(int x = elem.xIni; x >= elem.xFin; x--)
@@ -69,7 +73,7 @@ public class Graficos extends Actor
                     break;
                 }
             }
-        else
+        else if(elem.xIni < elem.xFin)
             for(int x = elem.xIni; x <= elem.xFin; x++)
             {
                 int y = (int)(m * (x - elem.xFin) + elem.yFin);
@@ -81,6 +85,37 @@ public class Graficos extends Actor
                     break;
                 }
             }
+        else
+        {
+            if(elem.yIni > elem.yFin)
+            {
+                int x = elem.xIni;
+                for(int y = elem.yIni; y >= elem.yFin; y--)
+                {
+                    java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
+                    if(lista.isEmpty())
+                    {
+                        elem.xIni = x;
+                        elem.yIni = y;
+                        break;
+                    }
+                }
+            }   
+            else
+            {
+                int x = elem.xIni;
+                for(int y = elem.yIni; y <= elem.yFin; y++)
+                {
+                    java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
+                    if(lista.isEmpty())
+                    {
+                        elem.xIni = x;
+                        elem.yIni = y;
+                        break;
+                    }
+                }
+            }
+        }
             
         if(elem.xFin > elem.xIni)
             for(int x = elem.xFin; x >= elem.xIni; x--)
@@ -94,7 +129,7 @@ public class Graficos extends Actor
                     break;
                 }
             }
-        else
+        else if(elem.xFin < elem.xIni)
             for(int x = elem.xFin; x <= elem.xIni; x++)
             {
                 int y = (int)(m * (x - elem.xIni) + elem.yIni);
@@ -105,8 +140,39 @@ public class Graficos extends Actor
                     elem.yFin = y;
                     break;
                 }
+            }   
+        else
+        {
+            if(elem.yFin > elem.yIni)
+            {
+                int x = elem.xFin;
+                for(int y = elem.yFin; y >= elem.yIni; y--)
+                {
+                    java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
+                    if(lista.isEmpty())
+                    {
+                        elem.xFin = x;
+                        elem.yFin = y;
+                        break;
+                    }
+                }
+            }   
+            else
+            {
+                int x = elem.xFin;
+                for(int y = elem.yFin; y <= elem.yIni; y++)
+                {
+                    java.util.List lista = getWorld().getObjectsAt(x, y, Diagramas.class);
+                    if(lista.isEmpty())
+                    {
+                        elem.xFin = x;
+                        elem.yFin = y;
+                        break;
+                    }
+                }
             }
-       
+        }
+            
         if(esFinal)
         {
             if(validaRelacion(x1, y1, x2, y2))
