@@ -51,7 +51,7 @@ public class WActividades extends WDiagramas
         addObject(boton4, 180, 25);
         addObject(boton5, 230, 25);
     }
-     public void act() 
+    public void act() 
     {    
        MouseInfo mouse = Greenfoot.getMouseInfo(); 
         if(Greenfoot.mouseClicked(g))

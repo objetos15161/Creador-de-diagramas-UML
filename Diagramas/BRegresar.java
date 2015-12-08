@@ -15,6 +15,13 @@ public class BRegresar extends Actor
     public void act() 
     { 
         if(Greenfoot.mouseClicked(this))
+        {
+            try
+            {
+                ((WDiagramas)(getWorld())).sonido.stop();
+            }
+            catch(Exception ex){};
             Greenfoot.setWorld(new Menu());  
+        }
     }   
 }

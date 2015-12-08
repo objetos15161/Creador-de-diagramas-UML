@@ -35,7 +35,19 @@ public class Cactor extends DCasoUso
             {
                 if(((WCasoUso)getWorld()).mousePresionado)
                 {
-                    ((WCasoUso)getWorld()).agregaPunto(getX(), getY(), true);
+                    String accion = (String)JOptionPane.showInputDialog(
+                        null,
+                        "Selecciona el tipo de relación:\n",
+                        "Tipo de relación",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        new Object[] {"Asociacion", "Generalizacion"},
+                        "Asociacion");
+
+                    if(accion != null && accion == "Asociacion")
+                        ((WCasoUso)getWorld()).agregaPunto(getX(), getY(), true, true);
+                    else
+                        ((WCasoUso)getWorld()).agregaPunto(getX(), getY(), true, false);
                     ((WCasoUso)getWorld()).mousePresionado = false;
                 }
             }

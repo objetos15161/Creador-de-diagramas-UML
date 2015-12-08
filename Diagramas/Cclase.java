@@ -39,7 +39,19 @@ public class Cclase extends DClases
             {
                 if(((WClase)getWorld()).mousePresionado)
                 {
-                    ((WClase)getWorld()).agregaPunto(getX(), getY(), true);
+                    String accion = (String)JOptionPane.showInputDialog(
+                        null,
+                        "Selecciona el tipo de relación:\n",
+                        "Tipo de relación",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        new Object[] {"Asociacion", "Generalizacion"},
+                        "Asociacion");
+
+                    if(accion != null && accion == "Asociacion")
+                        ((WClase)getWorld()).agregaPunto(getX(), getY(), true, true);
+                    else
+                        ((WClase)getWorld()).agregaPunto(getX(), getY(), true, false);
                     ((WClase)getWorld()).mousePresionado = false;
                 }
             }

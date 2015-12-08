@@ -11,6 +11,7 @@ public class WDiagramas extends World
     public Graficos g;
     protected boolean mousePresionado;
     public int xIni, yIni, xFin, yFin;
+    public GreenfootSound sonido;
     
     /**
      * Constructor for objects of class WDiagramas.
@@ -23,6 +24,9 @@ public class WDiagramas extends World
         
         g = new Graficos();
         mousePresionado = false;
+        
+        sonido = new GreenfootSound("Kalimba.mp3");
+        sonido.play();
     }
     
     public void agregaPunto(int x, int y, boolean esFinal)
@@ -37,6 +41,21 @@ public class WDiagramas extends World
             xFin = x;
             yFin = y;
             g.agregaLinea(xIni, yIni, xFin, yFin, esFinal);
+        }
+    }
+    
+    public void agregaPunto(int x, int y, boolean esFinal, boolean relleno)
+    {
+        if(!mousePresionado)
+        {
+            xIni = x;
+            yIni = y;
+        }
+        else
+        {
+            xFin = x;
+            yFin = y;
+            g.agregaLinea(xIni, yIni, xFin, yFin, esFinal, relleno);
         }
     }
 }
